@@ -11,6 +11,7 @@
 
 char *read_line();
 char **parse_line(char *line);
-int run_command(char **args);
+char *get_path(char *filename);
+int run_command(char **args, char **argv);
 
 #endif /* define MAIN_H */
