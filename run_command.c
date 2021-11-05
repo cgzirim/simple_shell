@@ -13,7 +13,7 @@ int run_command(char **args, char **argv)
 	int status;
 	pid_t pid1;
 	pid_t pid2;
-	char *args0;
+	char *path;
 
 	(void)argv;
 
@@ -21,14 +21,14 @@ int run_command(char **args, char **argv)
 
 	if (!strchr(args[0], '/'))
 	{
-		args0 = get_path(args[0]);
-		if (args0 != NULL)
+		path = get_path(args[0]);
+		if (path != NULL)
 		{
 			pid1 = fork();
 			if (pid1 == 0)
 			{
-				if (execve(args0, args, NULL) == -1)
-					perror(args0);
+				if (execve(path, args, NULL) == -1)
+					perror(path);
 			}
 			else
 				wait(&status);
@@ -45,8 +45,11 @@ int run_command(char **args, char **argv)
 			perror(args[0]);
 	}
 	else
+	{
 		wait(&status);
+	}
 
+	free(path);
 	return (1);
 }
 

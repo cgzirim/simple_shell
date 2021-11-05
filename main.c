@@ -27,10 +27,9 @@ int main(int argc, char **argv)
 		str = read_line();
 		args = parse_line(str);
 		status = run_command(args, argv);
+		free(str);
+		free(args);
 	}
-
-	free(str);
-	free(args);
 
 	return (1);
 }

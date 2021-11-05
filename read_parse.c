@@ -30,7 +30,7 @@ char **parse_line(char *line)
 	char **array;
 	int index = 0, len = 100;
 
-	array = malloc(sizeof(char *) * len);
+	array = malloc(len);
 	if (!array)
 		perror("Unable to allocate memory");
 
@@ -40,6 +40,8 @@ char **parse_line(char *line)
 	{
 		array[index] = token;
 		index++;
+
+		array = realloc(array, len * 2);
 
 		token = strtok(NULL, delim);
 	}
