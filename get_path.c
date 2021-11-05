@@ -26,9 +26,7 @@ char *get_path(char *filename)
 		token = strtok(NULL, ":");
 	}
 
-
 /* Join txt to directory path & check if its true*/
-
 	strcat(txt, "/");
 	strcat(txt, filename);
 
@@ -37,12 +35,16 @@ char *get_path(char *filename)
 		strcpy(path, directory[j]);
 		strcat(path, txt);
 		if (stat(path, &stats) == 0)
+		{
+			free(txt);
+			free(directory);
 			return (path);
-
+		}
 		j++;
 	}
 
 	free(txt);
+	free(directory);
 	free(path);
 	return (NULL);
 }
